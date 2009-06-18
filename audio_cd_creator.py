@@ -55,8 +55,8 @@ def main():
 
 def retrieveFileLengths(filedir):
     '''Scans all of the mp3 files in the specified folder and stores their track lengths'''
-    for f in os.listdir(filedir):
-        f = os.path.join(filedir, f)
+    for f in os.popen("find %s -name '*.mp3'" % filedir).read().split("\n"):
+#        f = os.path.join(filedir, f)
         if f[-3:].lower() != "mp3":
             continue
         length = int(mad.MadFile(f).total_time())
